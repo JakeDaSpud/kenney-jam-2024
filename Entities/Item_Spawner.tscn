@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1u83gjrw1u71"]
+
+[ext_resource type="Script" path="res://Scripts/Item_Spawner.gd" id="1_y44vt"]
+
+[node name="Item_Spawner" type="Node2D"]
+position = Vector2(432, -522)
+script = ExtResource("1_y44vt")
+
+[node name="Spawn_Location" type="Node2D" parent="."]
