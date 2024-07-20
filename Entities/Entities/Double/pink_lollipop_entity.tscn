@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://sedp1fm4hgb6"]
+
+[ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_1alnh"]
+[ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_8ly4y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2su0x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4rku"]
+radius = 7.2
+
+[node name="Double_Circle_Entity" type="RigidBody2D"]
+input_pickable = true
+gravity_scale = 0.15
+script = ExtResource("1_1alnh")
+item_size = 2
+is_sweet = true
+is_food = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -36)
+scale = Vector2(4, 4)
+texture = ExtResource("2_8ly4y")
+hframes = 16
+vframes = 7
+frame = 25
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 36)
+scale = Vector2(4, 4)
+texture = ExtResource("2_8ly4y")
+hframes = 16
+vframes = 7
+frame = 24
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3, 3)
+shape = SubResource("CapsuleShape2D_2su0x")
+
+[node name="Entity_CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5, 5)
+shape = SubResource("CapsuleShape2D_f4rku")

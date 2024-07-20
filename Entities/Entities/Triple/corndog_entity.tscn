@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://bboumeph7dqxd"]
+
+[ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_eeyit"]
+[ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_cutbs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2su0x"]
+height = 39.3333
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffr0b"]
+size = Vector2(14.4, 43.2)
+
+[node name="Triple_Circle_Entity" type="RigidBody2D"]
+input_pickable = true
+gravity_scale = 0.1
+script = ExtResource("1_eeyit")
+item_size = 3
+is_food = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -57.6)
+rotation = 1.5708
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("2_cutbs")
+hframes = 16
+vframes = 7
+frame = 45
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("2_cutbs")
+hframes = 16
+vframes = 7
+frame = 46
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(0, 57.6)
+rotation = 1.5708
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("2_cutbs")
+hframes = 16
+vframes = 7
+frame = 47
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.7, 1.7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+scale = Vector2(3, 3)
+shape = SubResource("CapsuleShape2D_2su0x")
+
+[node name="Entity_CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ffr0b")

@@ -47,6 +47,8 @@ const _const_divisor : float = 10;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.collision_mask = 0b11;
+	self.collision_layer = 0b11;
 	
 	_area_2d = self.get_node("./Area2D");
 	if (_area_2d == null):
@@ -96,8 +98,8 @@ func propel(direction_vector : Vector2) -> void:
 func _on_area_2d_input_event(viewport, event, shape_idx) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			print_debug("Left mouse button clicked on Area2D");
-			print_debug("Will propel towards ", (self.position - event.position).normalized());
+			#print_debug("Left mouse button clicked on Area2D");
+			#print_debug("Will propel towards ", (self.position - event.position).normalized());
 			self.linear_velocity = Vector2.ZERO;
 			_propel_direction = ((self.position - event.position).normalized() * _impulse_magnitude);
 			# Makes it so that there's no impulsing DOWNWARDS, but it's weird lol

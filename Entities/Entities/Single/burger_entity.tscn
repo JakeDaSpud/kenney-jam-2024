@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8prd0834nx88"]
+[gd_scene load_steps=4 format=3 uid="uid://b31b0pt7jubq"]
 
-[ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_ad1bn"]
-[ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_bc3kc"]
+[ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_o5mpe"]
+[ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_7qdjw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ka2pu"]
 radius = 9.0
@@ -9,24 +9,25 @@ radius = 9.0
 [node name="Single_Circle_Entity" type="RigidBody2D"]
 input_pickable = true
 gravity_scale = 0.25
-script = ExtResource("1_ad1bn")
-is_sweet = true
+script = ExtResource("1_o5mpe")
 is_food = true
 is_short = true
+is_cheese = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_bc3kc")
+scale = Vector2(4, 4)
+texture = ExtResource("2_7qdjw")
 hframes = 16
 vframes = 7
-frame = 14
+frame = 92
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_ka2pu")
 
 [node name="Entity_CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2.5, 2.5)
+scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_ka2pu")
