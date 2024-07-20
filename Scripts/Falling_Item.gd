@@ -56,15 +56,15 @@ func _ready():
 		_area_2d.connect("input_event", Callable(self, "_on_area_2d_input_event"));
 	
 	if (item_size == Item_Size.SINGLE):
-		_falling_speed = 100;
+		_falling_speed = 50;
 		_impulse_magnitude = 3000 / _const_divisor;
 	
 	elif (item_size == Item_Size.DOUBLE):
-		_falling_speed = 70;
+		_falling_speed = 30;
 		_impulse_magnitude = 2500 / _const_divisor;
 	
 	elif (item_size == Item_Size.TRIPLE):
-		_falling_speed = 40;
+		_falling_speed = 10;
 		_impulse_magnitude = 2250 / _const_divisor;
 	
 	else:

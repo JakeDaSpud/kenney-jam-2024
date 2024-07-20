@@ -1,29 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3vdj4t3kp53p"]
+[gd_scene load_steps=5 format=3 uid="uid://d3vdj4t3kp53p"]
 
 [ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_ndqxl"]
 [ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_amcq1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ka2pu"]
-radius = 9.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2su0x"]
 
-[node name="Single_Circle_Entity" type="RigidBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4rku"]
+radius = 7.2
+
+[node name="Double_Circle_Entity" type="RigidBody2D"]
 input_pickable = true
-gravity_scale = 0.25
+gravity_scale = 0.15
 script = ExtResource("1_ndqxl")
+item_size = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+position = Vector2(0, -36)
+scale = Vector2(4, 4)
 texture = ExtResource("2_amcq1")
 hframes = 16
 vframes = 7
-frame = 2
+frame = 8
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 36)
+scale = Vector2(4, 4)
+texture = ExtResource("2_amcq1")
+hframes = 16
+vframes = 7
+frame = 24
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(3, 3)
-shape = SubResource("CircleShape2D_ka2pu")
+shape = SubResource("CapsuleShape2D_2su0x")
 
 [node name="Entity_CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2.5, 2.5)
-shape = SubResource("CircleShape2D_ka2pu")
+scale = Vector2(5, 5)
+shape = SubResource("CapsuleShape2D_f4rku")
