@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1ak2tp35nixt"]
+
+[ext_resource type="Script" path="res://Scripts/Falling_Item.gd" id="1_dw3nw"]
+[ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_otqdi"]
+
+[sub_resource type="TileSet" id="TileSet_s6cpq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ka2pu"]
+radius = 9.0
+
+[node name="Main_Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_s6cpq")
+format = 2
+
+[node name="Single_Circle_Entity" type="RigidBody2D" parent="."]
+position = Vector2(314, 63)
+script = ExtResource("1_dw3nw")
+item_size = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Single_Circle_Entity"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_otqdi")
+hframes = 16
+vframes = 7
+frame = 14
+
+[node name="Area2D" type="Area2D" parent="Single_Circle_Entity"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Single_Circle_Entity/Area2D"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_ka2pu")

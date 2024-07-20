@@ -11,10 +11,21 @@ config_version=5
 [application]
 
 config/name="Kenney_Jam_2024"
+run/main_scene="res://Scenes/main_game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=432
+window/size/viewport_height=243
+window/size/mode=2
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
