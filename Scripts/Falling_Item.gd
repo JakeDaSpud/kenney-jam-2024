@@ -111,7 +111,6 @@ func _on_area_2d_input_event(viewport, event, shape_idx) -> void:
 			
 			if (!Game_Manager.game_started):
 				Game_Manager.game_started = true;
-				Game_Manager.progress_round();
 			
 			#print_debug("Left mouse button clicked on Area2D");
 			

@@ -41,11 +41,11 @@ func _on_body_entered(body):
 	):
 		_correct();
 		if (body.item_size == Item_Size.SINGLE):
-			Game_Manager.player_score += 0.1;
+			Game_Manager.player_score += 1;
 		elif (body.item_size == Item_Size.DOUBLE):
-			Game_Manager.player_score += 0.2;
+			Game_Manager.player_score += 2;
 		elif (body.item_size == Item_Size.TRIPLE):
-			Game_Manager.player_score += 0.3;
+			Game_Manager.player_score += 3;
 		
 		Game_Manager.update_score_text();
 	

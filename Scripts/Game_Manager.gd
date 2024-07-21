@@ -45,7 +45,7 @@ const _Digits : Array = [
 @export var item_count : int = 1;
 @export var max_item_count : int = 1;
 @export var round_count : int = 0;
-@export var player_score : float = 0.0;
+@export var player_score : int = 0.0;
 var _correct_shake : bool = false;
 var _incorrect_shake : bool = false;
 var _time : int = 0;
@@ -174,7 +174,7 @@ func get_game_started() -> bool:
 func _process(delta):
 	
 	# Enough Points to go to next Round
-	if (round_count < (player_score)):
+	if (round_count <= floor(player_score / 5)):
 		progress_round();
 	
 	# Scaling Max count doesn't work very well, 4 is very tough anyways
@@ -261,7 +261,7 @@ func progress_round():
 	
 	if (round_count >= 15):
 		max_item_count = 4;
-	elif (round_count >= 8):
+	elif (round_count >= 10):
 		max_item_count = 3;
 	elif (round_count >= 2):
 		max_item_count = 2;
@@ -283,13 +283,13 @@ func decrease_item_count():
 func update_score_text():
 	#print_debug(str(player_score * 10).pad_zeros(3));
 	
-	if (player_score * 10 > 999):
+	if (player_score > 999):
 		get_node("Score_01").texture = Nine_PNG;
 		get_node("Score_02").texture = Nine_PNG;
 		get_node("Score_03").texture = Nine_PNG;
 	
 	else:
-		var score_string : String = str(player_score * 10).pad_zeros(3);
+		var score_string : String = str(player_score).pad_zeros(3);
 		get_node("Score_01").texture = _Digits[score_string[0].to_int()];
 		get_node("Score_02").texture = _Digits[score_string[1].to_int()];
 		get_node("Score_03").texture = _Digits[score_string[2].to_int()];
