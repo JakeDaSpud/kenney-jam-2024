@@ -14,6 +14,9 @@ const Short_PNG : Texture = preload("res://Assets/Short.png");
 const Long_PNG : Texture = preload("res://Assets/Long.png");
 const Cheese_PNG : Texture = preload("res://Assets/Cheese.png");
 
+# Miss Import
+const Miss_PNG : Texture = preload("res://Assets/X.png");
+
 # Number Imports
 const Zero_PNG : Texture = preload("res://Assets/Zero.png");
 const One_PNG : Texture = preload("res://Assets/One.png");
@@ -46,11 +49,14 @@ const _Digits : Array = [
 @export var max_item_count : int = 1;
 @export var round_count : int = 0;
 @export var player_score : int = 0.0;
+@export var player_misses : int = 0;
 var _correct_shake : bool = false;
 var _incorrect_shake : bool = false;
 var _time : int = 0;
 var _incorrect_time_max : int = 30;
 var _correct_time_max : int = 10;
+var _final_score : int;
+var _game_over : bool = false;
 
 func _set_random_categories():
 	var _first_cat : Node;
@@ -321,7 +327,26 @@ func correct_sequence():
 	
 
 func incorrect_sequence():
+	player_misses += 1;
 	$Incorrect.play();
 	# Shake category text
 	_incorrect_shake = true;
+	
+	if (player_misses > 3 && !_game_over):
+		_game_over = true;
+		_final_score = player_score;
+		get_node("Miss_04").texture = Miss_PNG;
+		var score_string : String = str(player_score).pad_zeros(3);
+		get_node("Final_Score_01").texture = _Digits[score_string[0].to_int()];
+		get_node("Final_Score_02").texture = _Digits[score_string[1].to_int()];
+		get_node("Final_Score_03").texture = _Digits[score_string[2].to_int()];
+	
+	if (player_misses > 2 && get_node("Miss_03").texture == null):
+		get_node("Miss_03").texture = Miss_PNG;
+	
+	if (player_misses > 1 && get_node("Miss_02").texture == null):
+		get_node("Miss_02").texture = Miss_PNG;
+	
+	if (player_misses > 0 && get_node("Miss_01").texture == null):
+		get_node("Miss_01").texture = Miss_PNG;
 	

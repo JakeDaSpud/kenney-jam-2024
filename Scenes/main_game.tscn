@@ -442,6 +442,34 @@ scale = Vector2(4, 4)
 position = Vector2(504, 144)
 scale = Vector2(4, 4)
 
+[node name="Miss_01" type="Sprite2D" parent="."]
+position = Vector2(378, 270)
+scale = Vector2(2, 2)
+
+[node name="Miss_02" type="Sprite2D" parent="."]
+position = Vector2(414, 270)
+scale = Vector2(2, 2)
+
+[node name="Miss_03" type="Sprite2D" parent="."]
+position = Vector2(450, 270)
+scale = Vector2(2, 2)
+
+[node name="Miss_04" type="Sprite2D" parent="."]
+position = Vector2(486, 270)
+scale = Vector2(2, 2)
+
+[node name="Final_Score_01" type="Sprite2D" parent="."]
+position = Vector2(396, 234)
+scale = Vector2(2, 2)
+
+[node name="Final_Score_02" type="Sprite2D" parent="."]
+position = Vector2(432, 234)
+scale = Vector2(2, 2)
+
+[node name="Final_Score_03" type="Sprite2D" parent="."]
+position = Vector2(468, 234)
+scale = Vector2(2, 2)
+
 [node name="Left_Category_Text" type="Sprite2D" parent="."]
 position = Vector2(252, 378)
 scale = Vector2(2, 2)
