@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1ak2tp35nixt"]
+[gd_scene load_steps=9 format=3 uid="uid://b1ak2tp35nixt"]
 
 [ext_resource type="Script" path="res://Scripts/Game_Manager.gd" id="1_wqcdv"]
 [ext_resource type="Texture2D" uid="uid://caka5lwuuv3so" path="res://Assets/tilemap_packed.png" id="2_otqdi"]
+[ext_resource type="AudioStream" uid="uid://b47ov1pee37ew" path="res://Assets/SFX/FlingSort_Click_SFX.mp3" id="3_gt6ap"]
+[ext_resource type="AudioStream" uid="uid://bpsg3thkd47ak" path="res://Assets/SFX/FlingSort_Correct_SFX.mp3" id="4_8tc58"]
+[ext_resource type="AudioStream" uid="uid://c5pcgml3edo5" path="res://Assets/SFX/FlingSort_BG_Music_SFX.mp3" id="4_k27jo"]
+[ext_resource type="AudioStream" uid="uid://bsqw6sqfh4x8y" path="res://Assets/SFX/FlingSort_Incorrect_SFX.mp3" id="5_l6fw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sumo3"]
 texture = ExtResource("2_otqdi")
@@ -410,9 +414,55 @@ layer_1/tile_data = PackedInt32Array(-786432, 393216, 2, -720896, 393216, 2, -65
 
 [node name="Item_Spawn_Area" type="ReferenceRect" parent="."]
 offset_left = 144.0
-offset_top = -594.0
+offset_top = 18.0
 offset_right = 720.0
-offset_bottom = -432.0
+offset_bottom = 180.0
 
 [node name="Item_Spawn_Timer" type="Timer" parent="."]
+process_callback = 0
 wait_time = 3.5
+
+[node name="Round_01" type="Sprite2D" parent="."]
+position = Vector2(414, 54)
+scale = Vector2(2, 2)
+
+[node name="Round_02" type="Sprite2D" parent="."]
+position = Vector2(450, 54)
+scale = Vector2(2, 2)
+
+[node name="Score_01" type="Sprite2D" parent="."]
+position = Vector2(360, 144)
+scale = Vector2(4, 4)
+
+[node name="Score_02" type="Sprite2D" parent="."]
+position = Vector2(432, 144)
+scale = Vector2(4, 4)
+
+[node name="Score_03" type="Sprite2D" parent="."]
+position = Vector2(504, 144)
+scale = Vector2(4, 4)
+
+[node name="Left_Category_Text" type="Sprite2D" parent="."]
+position = Vector2(252, 378)
+scale = Vector2(2, 2)
+
+[node name="Right_Category_Text" type="Sprite2D" parent="."]
+position = Vector2(612, 378)
+scale = Vector2(2, 2)
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gt6ap")
+volume_db = -10.0
+
+[node name="BG" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_k27jo")
+volume_db = -20.0
+autoplay = true
+
+[node name="Correct" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8tc58")
+volume_db = -20.0
+
+[node name="Incorrect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_l6fw3")
+volume_db = -10.0

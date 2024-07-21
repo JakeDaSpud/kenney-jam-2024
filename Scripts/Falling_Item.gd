@@ -44,7 +44,7 @@ const _const_divisor : float = 10;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if (Game_Manager == null):
-		print_debug("Game man was null");
+		#print_debug("Game man was null");
 		Game_Manager = get_node("/root/Main_Game").game_manager_reference as Node2D;
 	
 	self.collision_mask = 0b11;
@@ -54,7 +54,7 @@ func _ready():
 	if (_area_2d == null):
 		print_debug("No Area2D Node found.");
 	else:
-		print_debug("Area2D Node found.");
+		#print_debug("Area2D Node found.");
 		_area_2d.connect("input_event", Callable(self, "_on_area_2d_input_event"));
 	
 	if (item_size == Item_Size.SINGLE):
@@ -78,13 +78,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	# You should NOT be there
+	if (self.global_position.y > 1000 || self.global_position.y < -500):
+		self.queue_free();
+		Game_Manager.decrease_item_count();
+	
 	if (!Game_Manager.get_game_started()):
 		_falling_speed = 0.0;
 		self.rotation += 1 * delta;
 	
 	if (_should_propel):
 		_propel(Vector2(_propel_direction.x, _propel_direction.y + (_falling_speed * delta)));
-		await get_tree().create_timer(0.01).timeout;
+		#await get_tree().create_timer(0.01).timeout;
 		_should_propel = false;
 	else:
 		_fall(delta);
@@ -95,6 +100,7 @@ func _fall(delta) -> void:
 
 # Sends this Item in the parameter direction
 func _propel(direction_vector : Vector2) -> void:
+	Game_Manager.play_click();
 	self.apply_impulse(direction_vector);
 	
 
@@ -108,10 +114,10 @@ func _on_area_2d_input_event(viewport, event, shape_idx) -> void:
 				Game_Manager.progress_round();
 			
 			#print_debug("Left mouse button clicked on Area2D");
-			#print_debug("Will propel towards ", (self.position - event.position).normalized());
 			
 			self.linear_velocity = Vector2.ZERO;
-			_propel_direction = ((self.position - event.position).normalized() * _impulse_magnitude);
+			_propel_direction = ((self.global_position - event.global_position).normalized() * _impulse_magnitude);
+			#print_debug("Will propel towards ", ((self.global_position - event.global_position).normalized() * _impulse_magnitude));
 			
 			# Makes it so that there's no impulsing DOWNWARDS, but it's weird lol
 			#if (_propel_direction.y > 0):

@@ -63,6 +63,7 @@ var _Triple_Items : Array = [
 	_Triple_long_burger
 ]
 
+const Category = preload("res://Scripts/Category_Enum.gd").Category;
 var _can_spawn_single : bool = false;
 var _can_spawn_double : bool = false;
 var _can_spawn_triple : bool = false;
@@ -100,11 +101,26 @@ func _update_spawn_pool() -> void:
 
 func _new_random_spawn_location():
 	var _spawnable_area : ReferenceRect = $"../Item_Spawn_Area";
-	var _new_position = _spawnable_area.position + Vector2(randf() * _spawnable_area.size.x, randf() * _spawnable_area.size.y);
-	self.position = _new_position;
+	var _new_position = Vector2(randf_range(144, 720), -100);
+	get_child(0).global_position = _new_position;
 	
 
 func _spawn_item() -> void:
+	
+	# Change Spawn Location
+	_new_random_spawn_location();
+	
+	var _spawning_item = _pick_new_item();
+	
+	print_debug("to spawn ", _spawning_item);
+	
+	add_child(_spawning_item);
+	_spawning_item.rotation = randf_range(-360, 360);
+	
+	Game_Manager.increase_item_count();
+	
+
+func _pick_new_item() -> RigidBody2D:
 	# Check depending on what type of category it is, no doubles, starts with _Double
 	# Sweet Savoury - No drinks
 	# Glass NotGlass
@@ -112,26 +128,40 @@ func _spawn_item() -> void:
 	# Short Long - No Doubles
 	# Cheese NotCheese
 	
-	# Change Spawn Location
-	_new_random_spawn_location();
-	
-	var _spawning_item;
+	var _scene_out : RigidBody2D;
 	
 	if (_can_spawn_triple):
 		# Randomly pick from all 3 Pools
-		pass;
+		var _rand_int = randi_range(1, 100);
+		if (_rand_int > 50):
+			_scene_out = _Single_Items.pick_random().instantiate();
+		elif (_rand_int > 20):
+			_scene_out = _Double_Items.pick_random().instantiate();
+		else:
+			_scene_out = _Triple_Items.pick_random().instantiate();
+	
 	elif (_can_spawn_double):
 		# Randomly pick from 2 Pools
-		pass;
+		var _rand_int = randi_range(1, 100);
+		if (_rand_int > 40):
+			_scene_out = _Single_Items.pick_random().instantiate();
+		else:
+			_scene_out = _Double_Items.pick_random().instantiate();
+	
 	elif (_can_spawn_single):
 		# Randomly pick from 1 Pool
-		_spawning_item = _Single_Items.pick_random().instantiate();
-	print_debug("to spawn ", _spawning_item);
+		_scene_out = _Single_Items.pick_random().instantiate();
 	
-	add_child(_spawning_item);
-	_spawning_item.rotation_degrees = randf_range(-360, 360);
+	while (
+		!_scene_out.is_food && Game_Manager.current_category == Category.SWEET
+		):
+		_scene_out = _pick_new_item();
 	
-	Game_Manager.increase_item_count();
+	_scene_out.position = get_child(0).position;
+	
+	return _scene_out;
+	
 
 func _on_item_spawn_timer_timeout() -> void:
 	_spawn_item();
+	

@@ -16,10 +16,12 @@ func _process(delta):
 	pass
 
 func _correct():
+	Game_Manager.correct_sequence();
 	print_debug("Correct Item, Category: ", current_category);
 
 func _incorrect():
-	print_debug("Incorrect Item")
+	Game_Manager.incorrect_sequence();
+	print_debug("Incorrect Item");
 
 func _on_body_entered(body):
 	if (current_category == Category.NONE):
@@ -39,12 +41,13 @@ func _on_body_entered(body):
 	):
 		_correct();
 		if (body.item_size == Item_Size.SINGLE):
-			Game_Manager.player_score += 0.3;
+			Game_Manager.player_score += 0.1;
 		elif (body.item_size == Item_Size.DOUBLE):
-			Game_Manager.player_score += 0.4;
+			Game_Manager.player_score += 0.2;
 		elif (body.item_size == Item_Size.TRIPLE):
-			Game_Manager.player_score += 0.5;
-	
+			Game_Manager.player_score += 0.3;
+		
+		Game_Manager.update_score_text();
 	
 	else:
 		_incorrect();
